@@ -26,10 +26,24 @@ fun main() {
     }
 
     fun part2(input: List<String>): Int {
-        return input.size
+        val left = mutableListOf<Int>()
+        val right =  mutableListOf<Int>()
+
+        input.forEach {
+            val line = it.split("\\s+".toRegex())
+            left.add(line[0].toInt())
+            right.add(line[1].toInt())
+        }
+        var sum = 0
+
+        left.forEach { leftValue ->
+            val similarity = right.count { leftValue == it }
+            sum += leftValue * similarity
+        }
+        return sum
     }
 
     val input = readInput("Day01")
-    part1(input).println()
-//    part2(input).println()
+//    part1(input).println()
+    part2(input).println()
 }
